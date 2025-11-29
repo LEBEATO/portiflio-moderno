@@ -77,13 +77,13 @@ const Home = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex items-center justify-center gap-6 lg:justify-start text-muted-foreground"
             >
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="transition-colors hover:text-green-600">
+              <a href="https://github.com/LEBEATO" target="_blank" rel="noreferrer" className="transition-colors hover:text-green-600">
                 <FaGithub className="w-6 h-6" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="transition-colors hover:text-blue-600">
+              <a href="https://www.linkedin.com/in/alexandre-beato-451926190/" target="_blank" rel="noreferrer" className="transition-colors hover:text-blue-600">
                 <FaLinkedin className="w-6 h-6" />
               </a>
-              <a href="mailto:seuemail@gmail.com" className="transition-colors hover:text-red-500">
+              <a href="mailto:beatoalex936@gmail.com" className="transition-colors hover:text-red-500">
                 <FaEnvelope className="w-6 h-6" />
               </a>
             </motion.div>
