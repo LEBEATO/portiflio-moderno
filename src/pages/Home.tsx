@@ -32,8 +32,8 @@ const Home = () => {
               transition={{ duration: 0.5 }}
               className="space-y-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 text-sm font-medium rounded-full bg-secondary text-secondary-foreground">
-                <PiHandsClapping size={20} /> Bem-vindo ao meu portfólio
+              <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 text-sm font-medium rounded-full bg-secondary text-secondary-foreground/80">
+                <PiHandsClapping size={28} className="text-amber-600" /> Bem-vindo ao meu portfólio.
               </div>
               <h1 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
                 Desenvolvedor <br />

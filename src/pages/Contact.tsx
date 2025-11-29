@@ -1,14 +1,29 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { FaEnvelope, FaWhatsapp, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaWhatsapp, FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Obrigado pelo contato! Em breve retornarei.");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      setSubmitted(true);
+    } catch (error) {
+      alert("Ocorreu um erro ao enviar a mensagem. Tente novamente.");
+    }
   };
 
   return (
@@ -75,29 +90,42 @@ const Contact = () => {
               <CardDescription>Preencha o formulário abaixo</CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">Nome</label>
-                    <Input id="name" placeholder="Seu nome" required />
+              {submitted ? (
+                <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
+                  <FaCheckCircle className="w-16 h-16 text-green-500" />
+                  <h3 className="text-2xl font-semibold">Obrigado!</h3>
+                  <p className="text-muted-foreground">Sua mensagem foi enviada com sucesso. <br/>Retornarei em breve.</p>
+                </div>
+              ) : (
+                <form 
+                  action="https://formspree.io/f/SEU_CODIGO_AQUI" // <-- IMPORTANTE: Cole seu link aqui!
+                  method="POST"
+                  onSubmit={handleSubmit} 
+                  className="space-y-4"
+                >
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="text-sm font-medium">Nome</label>
+                      <Input id="name" name="name" placeholder="Seu nome" required />
+                    </div>
+                    <div className="space-y-2">
+                      <label htmlFor="phone" className="text-sm font-medium">Telefone</label>
+                      <Input id="phone" name="phone" placeholder="(00) 00000-0000" />
+                    </div>
                   </div>
                   <div className="space-y-2">
-                    <label htmlFor="phone" className="text-sm font-medium">Telefone</label>
-                    <Input id="phone" placeholder="(00) 00000-0000" />
+                    <label htmlFor="email" className="text-sm font-medium">Email</label>
+                    <Input id="email" name="_replyto" type="email" placeholder="seu@email.com" required />
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">Email</label>
-                  <Input id="email" type="email" placeholder="seu@email.com" required />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">Mensagem</label>
-                  <Textarea id="message" placeholder="Conte-me sobre seu projeto..." className="min-h-[120px]" required />
-                </div>
-                <Button type="submit" className="w-full gap-2 bg-primary hover:bg-primary/90">
-                  Enviar Mensagem <FaPaperPlane className="w-4 h-4" />
-                </Button>
-              </form>
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-medium">Mensagem</label>
+                    <Textarea id="message" name="message" placeholder="Conte-me sobre seu projeto..." className="min-h-[120px]" required />
+                  </div>
+                  <Button type="submit" className="w-full gap-2 bg-primary hover:bg-primary/90">
+                    Enviar Mensagem <FaPaperPlane className="w-4 h-4" />
+                  </Button>
+                </form>
+              )}
             </CardContent>
           </Card>
         </div>

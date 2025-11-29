@@ -50,18 +50,18 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex items-center justify-between h-16">
         <a 
           href="#home" 
           onClick={(e) => handleScrollTo(e, 'home')}
           className="flex items-center space-x-2"
         >
-          <FaCode className="h-8 w-8 text-primary" />
-          <span className="font-bold text-xl hidden sm:inline-block">DevPortfolio</span>
+          <FaCode className="w-8 h-8 text-primary" />
+          <span className="hidden text-xl font-bold sm:inline-block">Dev/AlexBeato</span>
         </a>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="items-center hidden space-x-6 md:flex">
           {links.map((link) => {
             const sectionId = link.path.substring(1);
             return (
@@ -97,7 +97,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        <div className="flex md:hidden items-center space-x-4">
+        <div className="flex items-center space-x-4 md:hidden">
           <Button
             variant="ghost"
             size="icon"
@@ -109,11 +109,11 @@ const Navbar = () => {
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
-                <FaBars className="h-6 w-6" />
+                <FaBars className="w-6 h-6" />
               </Button>
             </SheetTrigger>
             <SheetContent>
-              <div className="flex flex-col space-y-4 mt-8">
+              <div className="flex flex-col mt-8 space-y-4">
                 {links.map((link) => (
                   <SheetClose asChild key={link.path}>
                     <a
