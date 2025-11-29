@@ -83,7 +83,7 @@ const Home = () => {
               <a href="https://www.linkedin.com/in/alexandre-beato-451926190/" target="_blank" rel="noreferrer" className="transition-colors hover:text-blue-600">
                 <FaLinkedin className="w-6 h-6" />
               </a>
-              <a href="mailto:beatoalex936@gmail.com" className="transition-colors hover:text-red-500">
+              <a href="mailto:alexandrebeato2018@gmail.com" className="transition-colors hover:text-red-500">
                 <FaEnvelope className="w-6 h-6" />
               </a>
             </motion.div>

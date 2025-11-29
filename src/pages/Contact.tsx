@@ -55,7 +55,7 @@ const Contact = () => {
                   className="justify-start w-full h-16 gap-4 text-lg transition-all hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 group" 
                   asChild
                 >
-                  <a href="mailto:beatoalex936@gmail.com">
+                  <a href="mailto:alexandrebeato2018@gmail.com">
                     <div className="p-2 transition-transform bg-blue-100 rounded-full dark:bg-blue-900 group-hover:scale-110">
                       <FaEnvelope className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
