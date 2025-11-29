@@ -19,7 +19,7 @@ const Contact = () => {
         transition={{ duration: 0.5 }}
         className="max-w-5xl mx-auto space-y-12"
       >
-        <div className="text-center space-y-4">
+        <div className="space-y-4 text-center">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Vamos Trabalhar Juntos?</h1>
           <p className="text-muted-foreground max-w-[700px] mx-auto">
             Tem uma ideia de projeto ou quer bater um papo sobre tecnologia? Entre em contato!
@@ -36,32 +36,32 @@ const Contact = () => {
               <CardContent className="space-y-4">
                 <Button 
                   variant="outline" 
-                  className="w-full justify-start gap-4 h-16 text-lg hover:border-green-500 hover:bg-green-50 dark:hover:bg-green-950/30 transition-all group" 
+                  className="justify-start w-full h-16 gap-4 text-lg transition-all hover:border-green-500 hover:bg-green-50 dark:hover:bg-green-950/30 group" 
                   asChild
                 >
-                  <a href="https://wa.me/5511999999999" target="_blank" rel="noreferrer">
-                    <div className="p-2 bg-green-100 dark:bg-green-900 rounded-full group-hover:scale-110 transition-transform">
-                      <FaWhatsapp className="h-6 w-6 text-green-600 dark:text-green-400" />
+                  <a href="https://wa.me/5535992640014" target="_blank" rel="noreferrer">
+                    <div className="p-2 transition-transform bg-green-100 rounded-full dark:bg-green-900 group-hover:scale-110">
+                      <FaWhatsapp className="w-6 h-6 text-green-600 dark:text-green-400" />
                     </div>
                     <div className="flex flex-col items-start">
                       <span className="font-semibold">WhatsApp</span>
-                      <span className="text-xs text-muted-foreground font-normal">Resposta rápida</span>
+                      <span className="text-xs font-normal text-muted-foreground">Resposta rápida</span>
                     </div>
                   </a>
                 </Button>
                 
                 <Button 
                   variant="outline" 
-                  className="w-full justify-start gap-4 h-16 text-lg hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-all group" 
+                  className="justify-start w-full h-16 gap-4 text-lg transition-all hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 group" 
                   asChild
                 >
-                  <a href="mailto:seuemail@gmail.com">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-full group-hover:scale-110 transition-transform">
-                      <FaEnvelope className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                  <a href="mailto:beatoalex936@gmail.com">
+                    <div className="p-2 transition-transform bg-blue-100 rounded-full dark:bg-blue-900 group-hover:scale-110">
+                      <FaEnvelope className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div className="flex flex-col items-start">
                       <span className="font-semibold">Email</span>
-                      <span className="text-xs text-muted-foreground font-normal">Para orçamentos detalhados</span>
+                      <span className="text-xs font-normal text-muted-foreground">Para orçamentos detalhados</span>
                     </div>
                   </a>
                 </Button>
@@ -95,7 +95,7 @@ const Contact = () => {
                   <Textarea id="message" placeholder="Conte-me sobre seu projeto..." className="min-h-[120px]" required />
                 </div>
                 <Button type="submit" className="w-full gap-2 bg-primary hover:bg-primary/90">
-                  Enviar Mensagem <FaPaperPlane className="h-4 w-4" />
+                  Enviar Mensagem <FaPaperPlane className="w-4 h-4" />
                 </Button>
               </form>
             </CardContent>
