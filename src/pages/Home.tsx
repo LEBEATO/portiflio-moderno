@@ -7,7 +7,7 @@ import Projects from './Projects';
 import Contact from './Contact';
 
 
-const USER_IMAGE = "/public/image.jpg"; 
+const USER_IMAGE = "/image.jpg"; 
 
 const Home = () => {
   const scrollToSection = (id: string) => {
