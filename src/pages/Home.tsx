@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import About from './About';
 import Projects from './Projects';
 import Contact from './Contact';
+import AnimatedText from '@/components/AnimatedText';
 
 const USER_IMAGE = '/image.jpg';
 const stack = ['Next.js', 'React', 'TypeScript', 'Node.js', 'Supabase'];
@@ -21,7 +22,7 @@ export default function Home() {
           </motion.div>
           <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} transition={{ duration: .6 }}>
           <p className="mb-3 text-sm font-semibold uppercase tracking-[.24em] text-primary">Olá, eu sou Alexandre Beato</p>
-          <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">Desenvolvedor <span className="text-gradient">Full Stack</span> que transforma ideias em produtos digitais.</h1>
+          <h1 className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"><AnimatedText text="Desenvolvedor Full Stack que transforma ideias em produtos digitais." highlight={['Full', 'Stack']} delay={.1} /></h1>
           </motion.div>
           <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} transition={{ duration: .6 }} className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground lg:mx-0">Desenvolvo aplicações web modernas, responsivas e seguras — da interface ao banco de dados — com foco em experiência do usuário e resultado para o negócio.</motion.p>
           <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }} transition={{ duration: .6 }} className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
