@@ -1,141 +1,30 @@
-import { useState, useEffect } from 'react';
-import { FaBars, FaMoon, FaSun, FaCode } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { FaBars, FaCode, FaGithub } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-} from '@/components/ui/sheet';
-import { useTheme } from '@/components/ui/theme-provider';
-import { motion } from 'framer-motion';
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-const Navbar = () => {
-  const { setTheme, theme } = useTheme();
-  const [activeSection, setActiveSection] = useState('home');
+const links = [{ name: 'Início', id: 'home' }, { name: 'Sobre', id: 'sobre' }, { name: 'Projetos', id: 'projetos' }, { name: 'Contato', id: 'contato' }];
 
-  const links = [
-    { name: 'Início', path: '#home' },
-    { name: 'Sobre Mim', path: '#sobre' },
-    { name: 'Projetos', path: '#projetos' },
-    { name: 'Contato', path: '#contato' },
-  ];
-
-  // Scroll Spy para detectar a seção ativa
+export default function Navbar() {
+  const [active, setActive] = useState('home');
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = links.map(link => link.path.substring(1));
-      const scrollPosition = window.scrollY + 100; // Offset para melhor detecção
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && setActive(entry.target.id)), { rootMargin: '-35% 0px -55%' });
+    links.forEach(({ id }) => { const section = document.getElementById(id); if (section) observer.observe(section); });
+    return () => observer.disconnect();
+  }, []);
+  const goTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element && element.offsetTop <= scrollPosition && (element.offsetTop + element.offsetHeight) > scrollPosition) {
-          setActiveSection(section);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [links]);
-
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setActiveSection(id);
-    }
-  };
-
-  return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex items-center justify-between h-16">
-        <a 
-          href="#home" 
-          onClick={(e) => handleScrollTo(e, 'home')}
-          className="flex items-center space-x-2"
-        >
-          <FaCode className="w-8 h-8 text-primary" />
-          <span className="hidden text-xl font-bold sm:inline-block">Dev/AlexBeato</span>
-        </a>
-
-        {/* Desktop Menu */}
-        <div className="items-center hidden space-x-6 md:flex">
-          {links.map((link) => {
-            const sectionId = link.path.substring(1);
-            return (
-              <a
-                key={link.path}
-                href={link.path}
-                onClick={(e) => handleScrollTo(e, sectionId)}
-                className={`relative text-sm font-medium transition-colors hover:text-primary ${
-                  activeSection === sectionId
-                    ? 'text-foreground'
-                    : 'text-muted-foreground'
-                }`}
-              >
-                {activeSection === sectionId && (
-                  <motion.span
-                    layoutId="underline"
-                    className="absolute left-0 top-full block h-[2px] w-full bg-primary mt-1"
-                  />
-                )}
-                {link.name}
-              </a>
-            );
-          })}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          >
-            <FaSun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <FaMoon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Alternar tema</span>
-          </Button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className="flex items-center space-x-4 md:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          >
-            <FaSun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <FaMoon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          </Button>
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <FaBars className="w-6 h-6" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <div className="flex flex-col mt-8 space-y-4">
-                {links.map((link) => (
-                  <SheetClose asChild key={link.path}>
-                    <a
-                      href={link.path}
-                      onClick={(e) => handleScrollTo(e, link.path.substring(1))}
-                      className={`text-lg font-medium ${
-                        activeSection === link.path.substring(1)
-                          ? 'text-primary'
-                          : 'text-muted-foreground'
-                      }`}
-                    >
-                      {link.name}
-                    </a>
-                  </SheetClose>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
+  return <header className="sticky top-0 z-50 border-b border-white/[0.08] bg-background/75 backdrop-blur-2xl">
+    <nav className="page-container flex h-[72px] items-center justify-between" aria-label="Navegação principal">
+      <button onClick={() => goTo('home')} className="flex items-center gap-3" aria-label="Ir para o início">
+        <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary/15 text-primary ring-1 ring-primary/25"><FaCode /></span>
+        <span className="font-bold tracking-tight">Alex<span className="text-primary">.dev</span></span>
+      </button>
+      <div className="hidden items-center gap-1 md:flex">
+        {links.map(link => <button key={link.id} onClick={() => goTo(link.id)} className={`rounded-lg px-4 py-2 text-sm font-medium transition ${active === link.id ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-white'}`}>{link.name}</button>)}
+        <Button asChild size="sm" className="ml-3 gap-2 bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90"><a href="https://github.com/LEBEATO" target="_blank" rel="noreferrer"><FaGithub /> GitHub</a></Button>
       </div>
+      <Sheet><SheetTrigger asChild><Button variant="ghost" size="icon" className="md:hidden" aria-label="Abrir menu"><FaBars /></Button></SheetTrigger><SheetContent className="border-white/10 bg-background/95"><div className="mt-12 flex flex-col gap-2">{links.map(link => <SheetClose asChild key={link.id}><button onClick={() => goTo(link.id)} className="rounded-xl px-4 py-4 text-left text-lg font-medium hover:bg-primary/10 hover:text-primary">{link.name}</button></SheetClose>)}</div></SheetContent></Sheet>
     </nav>
-  );
-};
-
-export default Navbar;
+  </header>;
+}
