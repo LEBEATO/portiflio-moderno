@@ -1,137 +1,24 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { FaEnvelope, FaLinkedin, FaPaperPlane, FaWhatsapp } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { FaEnvelope, FaWhatsapp, FaPaperPlane, FaCheckCircle } from 'react-icons/fa';
 
-const Contact = () => {
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-
-    try {
-      await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      setSubmitted(true);
-    } catch (error) {
-      alert("Ocorreu um erro ao enviar a mensagem. Tente novamente.");
-    }
+export default function Contact() {
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const sendWhatsApp = (event: React.FormEvent) => {
+    event.preventDefault();
+    const text = encodeURIComponent(`Olá Alexandre! Meu nome é ${name}. ${message}`);
+    window.open(`https://wa.me/5535992640014?text=${text}`, '_blank', 'noopener,noreferrer');
   };
-
-  return (
-    <div className="container py-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-5xl mx-auto space-y-12"
-      >
-        <div className="space-y-4 text-center">
-          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Vamos Trabalhar Juntos?</h1>
-          <p className="text-muted-foreground max-w-[700px] mx-auto">
-            Tem uma ideia de projeto ou quer bater um papo sobre tecnologia? Entre em contato!
-          </p>
-        </div>
-
-        <div className="grid gap-8 md:grid-cols-2">
-          <div className="space-y-6">
-            <Card className="bg-gradient-to-br from-background to-secondary/20 border-muted">
-              <CardHeader>
-                <CardTitle>Fale Comigo</CardTitle>
-                <CardDescription>Escolha o canal que preferir</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Button 
-                  variant="outline" 
-                  className="justify-start w-full h-16 gap-4 text-lg transition-all hover:border-green-500 hover:bg-green-50 dark:hover:bg-green-950/30 group" 
-                  asChild
-                >
-                  <a href="https://wa.me/5535992640014" target="_blank" rel="noreferrer">
-                    <div className="p-2 transition-transform bg-green-100 rounded-full dark:bg-green-900 group-hover:scale-110">
-                      <FaWhatsapp className="w-6 h-6 text-green-600 dark:text-green-400" />
-                    </div>
-                    <div className="flex flex-col items-start">
-                      <span className="font-semibold">WhatsApp</span>
-                      <span className="text-xs font-normal text-muted-foreground">Resposta rápida</span>
-                    </div>
-                  </a>
-                </Button>
-                
-                <Button 
-                  variant="outline" 
-                  className="justify-start w-full h-16 gap-4 text-lg transition-all hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-950/30 group" 
-                  asChild
-                >
-                  <a href="mailto:alexandrebeato2018@gmail.com">
-                    <div className="p-2 transition-transform bg-blue-100 rounded-full dark:bg-blue-900 group-hover:scale-110">
-                      <FaEnvelope className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div className="flex flex-col items-start">
-                      <span className="font-semibold">Email</span>
-                      <span className="text-xs font-normal text-muted-foreground">Para orçamentos detalhados</span>
-                    </div>
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Envie uma mensagem</CardTitle>
-              <CardDescription>Preencha o formulário abaixo</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {submitted ? (
-                <div className="flex flex-col items-center justify-center h-full gap-4 text-center">
-                  <FaCheckCircle className="w-16 h-16 text-green-500" />
-                  <h3 className="text-2xl font-semibold">Obrigado!</h3>
-                  <p className="text-muted-foreground">Sua mensagem foi enviada com sucesso. <br/>Retornarei em breve.</p>
-                </div>
-              ) : (
-                <form 
-                  action="https://formspree.io/f/SEU_CODIGO_AQUI" // <-- IMPORTANTE: Cole seu link aqui!
-                  method="POST"
-                  onSubmit={handleSubmit} 
-                  className="space-y-4"
-                >
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">Nome</label>
-                      <Input id="name" name="name" placeholder="Seu nome" required />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="phone" className="text-sm font-medium">Telefone</label>
-                      <Input id="phone" name="phone" placeholder="(00) 00000-0000" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">Email</label>
-                    <Input id="email" name="_replyto" type="email" placeholder="seu@email.com" required />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">Mensagem</label>
-                    <Textarea id="message" name="message" placeholder="Conte-me sobre seu projeto..." className="min-h-[120px]" required />
-                  </div>
-                  <Button type="submit" className="w-full gap-2 bg-primary hover:bg-primary/90">
-                    Enviar Mensagem <FaPaperPlane className="w-4 h-4" />
-                  </Button>
-                </form>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-      </motion.div>
+  return <div className="section-space page-container"><div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-gradient-to-br from-primary/[0.13] via-card to-card p-6 sm:p-10 lg:p-14">
+    <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/20 blur-[100px]" />
+    <div className="relative grid gap-12 lg:grid-cols-[.9fr_1.1fr]">
+      <div><p className="mb-3 text-sm font-semibold uppercase tracking-[.22em] text-primary">Vamos conversar</p><h2 className="text-3xl font-bold tracking-tight sm:text-5xl">Tem um projeto em mente?</h2><p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">Conte o que você precisa. Vamos transformar sua ideia em uma solução digital moderna, segura e preparada para crescer.</p>
+        <div className="mt-8 space-y-3"><a href="https://wa.me/5535992640014" target="_blank" rel="noreferrer" className="flex items-center gap-4 rounded-xl p-3 transition hover:bg-white/[0.04]"><span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-500/15 text-emerald-400"><FaWhatsapp /></span><span><strong className="block text-sm">WhatsApp</strong><small className="text-muted-foreground">(35) 99264-0014</small></span></a><a href="mailto:beatoalex936@gmail.com" className="flex items-center gap-4 rounded-xl p-3 transition hover:bg-white/[0.04]"><span className="grid h-11 w-11 place-items-center rounded-xl bg-primary/15 text-primary"><FaEnvelope /></span><span><strong className="block text-sm">E-mail</strong><small className="text-muted-foreground">beatoalex936@gmail.com</small></span></a><a href="https://www.linkedin.com/in/alexandre-beato-451926190/" target="_blank" rel="noreferrer" className="flex items-center gap-4 rounded-xl p-3 transition hover:bg-white/[0.04]"><span className="grid h-11 w-11 place-items-center rounded-xl bg-blue-500/15 text-blue-400"><FaLinkedin /></span><span><strong className="block text-sm">LinkedIn</strong><small className="text-muted-foreground">Alexandre Beato</small></span></a></div>
+      </div>
+      <form onSubmit={sendWhatsApp} className="glass rounded-2xl p-6 sm:p-8"><h3 className="text-xl font-bold">Iniciar uma conversa</h3><p className="mt-2 text-sm text-muted-foreground">A mensagem será aberta no seu WhatsApp para você revisar e enviar.</p><div className="mt-6 space-y-5"><div><label htmlFor="name" className="mb-2 block text-sm font-medium">Seu nome</label><Input id="name" value={name} onChange={e => setName(e.target.value)} required placeholder="Como posso chamar você?" className="h-12 bg-black/20" /></div><div><label htmlFor="message" className="mb-2 block text-sm font-medium">Sobre o projeto</label><Textarea id="message" value={message} onChange={e => setMessage(e.target.value)} required placeholder="Conte brevemente o que você deseja desenvolver..." className="min-h-36 resize-none bg-black/20" /></div><Button type="submit" size="lg" className="w-full gap-2 bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90">Enviar pelo WhatsApp <FaPaperPlane /></Button></div></form>
     </div>
-  );
-};
-
-export default Contact;
+  </div></div>;
+}
