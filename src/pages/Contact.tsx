@@ -3,6 +3,7 @@ import { FaEnvelope, FaLinkedin, FaPaperPlane, FaWhatsapp } from 'react-icons/fa
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import MotionReveal from '@/components/MotionReveal';
 
 export default function Contact() {
   const [name, setName] = useState('');
@@ -12,7 +13,7 @@ export default function Contact() {
     const text = encodeURIComponent(`Olá Alexandre! Meu nome é ${name}. ${message}`);
     window.open(`https://wa.me/5535992640014?text=${text}`, '_blank', 'noopener,noreferrer');
   };
-  return <div className="section-space page-container"><div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-gradient-to-br from-primary/[0.13] via-card to-card p-6 sm:p-10 lg:p-14">
+  return <div className="section-space page-container"><MotionReveal><div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-gradient-to-br from-primary/[0.13] via-card to-card p-6 sm:p-10 lg:p-14">
     <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/20 blur-[100px]" />
     <div className="relative grid gap-12 lg:grid-cols-[.9fr_1.1fr]">
       <div><p className="mb-3 text-sm font-semibold uppercase tracking-[.22em] text-primary">Vamos conversar</p><h2 className="text-3xl font-bold tracking-tight sm:text-5xl">Tem um projeto em mente?</h2><p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">Conte o que você precisa. Vamos transformar sua ideia em uma solução digital moderna, segura e preparada para crescer.</p>
@@ -20,5 +21,5 @@ export default function Contact() {
       </div>
       <form onSubmit={sendWhatsApp} className="glass rounded-2xl p-6 sm:p-8"><h3 className="text-xl font-bold">Iniciar uma conversa</h3><p className="mt-2 text-sm text-muted-foreground">A mensagem será aberta no seu WhatsApp para você revisar e enviar.</p><div className="mt-6 space-y-5"><div><label htmlFor="name" className="mb-2 block text-sm font-medium">Seu nome</label><Input id="name" value={name} onChange={e => setName(e.target.value)} required placeholder="Como posso chamar você?" className="h-12 bg-black/20" /></div><div><label htmlFor="message" className="mb-2 block text-sm font-medium">Sobre o projeto</label><Textarea id="message" value={message} onChange={e => setMessage(e.target.value)} required placeholder="Conte brevemente o que você deseja desenvolver..." className="min-h-36 resize-none bg-black/20" /></div><Button type="submit" size="lg" className="w-full gap-2 bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90">Enviar pelo WhatsApp <FaPaperPlane /></Button></div></form>
     </div>
-  </div></div>;
+  </div></MotionReveal></div>;
 }

@@ -3,6 +3,8 @@ import { ThemeProvider } from '@/components/ui/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AnimatedBackground from '@/components/AnimatedBackground';
+import ScrollProgress from '@/components/ScrollProgress';
 import Home from '@/pages/Home';
 import './App.css';
 
@@ -11,6 +13,8 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Router>
         <div className="flex min-h-screen flex-col bg-transparent text-foreground">
+          <AnimatedBackground />
+          <ScrollProgress />
           <Navbar />
           <main className="flex-1">
             <Routes>
