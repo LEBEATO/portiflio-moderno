@@ -13,6 +13,8 @@ export default function Contact() {
     event.preventDefault();
     const text = encodeURIComponent(`Olá Alexandre! Meu nome é ${name}. ${message}`);
     window.open(`https://wa.me/5535992640014?text=${text}`, '_blank', 'noopener,noreferrer');
+    setName('');
+    setMessage('');
   };
   return <div className="section-space page-container"><MotionReveal><div className="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-gradient-to-br from-primary/[0.13] via-card to-card p-6 sm:p-10 lg:p-14">
     <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-primary/20 blur-[100px]" />
