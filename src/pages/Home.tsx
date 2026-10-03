@@ -7,7 +7,7 @@ import Contact from './Contact';
 import AnimatedText from '@/components/AnimatedText';
 
 const USER_IMAGE = '/image.jpg';
-const stack = ['Next.js', 'React', 'TypeScript', 'Node.js', 'Supabase'];
+const stack = ['Next.js', 'React', 'TypeScript', 'Vite', 'NestJS', 'Supabase', 'PostgreSQL'];
 
 export default function Home() {
   const reduceMotion = useReducedMotion();
