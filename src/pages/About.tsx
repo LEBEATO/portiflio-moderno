@@ -3,7 +3,7 @@ import { FaDatabase, FaLaptopCode, FaServer } from 'react-icons/fa';
 import MotionReveal from '@/components/MotionReveal';
 import AnimatedText from '@/components/AnimatedText';
 
-const skills = ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js', 'NestJS', 'Tailwind CSS', 'Supabase', 'PostgreSQL', 'Prisma', 'Git & GitHub', 'Vercel'];
+const skills = ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Vite', 'Node.js', 'NestJS', 'Tailwind CSS', 'Supabase', 'PostgreSQL', 'Prisma', 'Zod', 'APIs REST', 'RLS', 'Git & GitHub', 'Vercel'];
 const services = [
   { icon: <FaLaptopCode />, title: 'Front-end', text: 'Interfaces rápidas, acessíveis e responsivas com foco na experiência real do usuário.' },
   { icon: <FaServer />, title: 'Back-end', text: 'APIs, autenticação, regras de negócio e integrações preparadas para crescer.' },
